@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .formdiv {
+        margin-left: 100;
+      }
+      #button1 {
+        width: 100px;
+        height: 40px;
+        background-color: #03994e;
+        color: white;
+      }
+      #button1:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+          0 17px 50px 0 rgba(0, 0, 0, 0.19);
+      }
+      table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+    </style>
+
+    <script>
+      function solve() {
+        var fv1 = document.getElementById("fv1").value;
+        fv1 = parseFloat(fv1);
+        var sv1 = document.getElementById("sv1").value;
+        sv1 = parseInt(sv1);
+
+        var fv2 = document.getElementById("fv2").value;
+        fv2 = parseFloat(fv2);
+        var sv2 = document.getElementById("sv2").value;
+        sv2 = parseFloat(sv2);
+
+        var fv3 = document.getElementById("fv3").value;
+        fv3 = parseFloat(fv3);
+        var sv3 = document.getElementById("sv3").value;
+        sv3 = parseFloat(sv3);
+
+        var fv4 = document.getElementById("fv4").value;
+        fv4 = parseFloat(fv4);
+        var sv4 = document.getElementById("sv4").value;
+        sv4 = parseFloat(sv4);
+
+        var fv5 = document.getElementById("fv5").value;
+        fv5 = parseFloat(fv5);
+        var sv5 = document.getElementById("sv5").value;
+        sv5 = parseFloat(sv5);
+
+        var fv6 = document.getElementById("fv6").value;
+        fv6 = parseFloat(fv6);
+        var sv6 = document.getElementById("sv6").value;
+        sv6 = parseFloat(sv6);
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          title: {
+            text:
+              "Comparison of weights of test specimen before and after the experiment",
+          },
+          axisY: {
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC",
+          },
+
+          toolTip: {
+            shared: true,
+          },
+          legend: {
+            cursor: "pointer",
+            itemclick: toggleDataSeries,
+          },
+          dataPointWidth: 30,
+          data: [
+            {
+              type: "column",
+              name: "Before the Experiment",
+              legendText: "Before Experiment",
+              showInLegend: true,
+              dataPoints: [
+                { label: "FR", y: fv1 },
+                { label: "PS STD", y: fv2 },
+                { label: "R 01", y: fv3 },
+                { label: "R 02", y: fv4 },
+                { label: "R 03", y: fv5 },
+                { label: "R 04", y: fv6 },
+              ],
+            },
+            {
+              type: "column",
+              name: "After the experiment",
+              legendText: "After experiment ",
+              // axisYType: "secondary",
+              showInLegend: true,
+              dataPoints: [
+                { label: "FR ", y: sv1 },
+                { label: "PS STD", y: sv2 },
+                { label: "R 01", y: sv3 },
+                { label: "R 02", y: sv4 },
+                { label: "R 03", y: sv5 },
+                { label: "R 04", y: sv6 },
+              ],
+            },
+          ],
+        });
+        chart.render();
+
+var wl1,wl2,wl3,wl4,wl5,wl6;        
+document.getElementById("frb1").innerHTML=fv1;
+document.getElementById("fra1").innerHTML=sv1;
+document.getElementById("wlg1").innerHTML=fv1-sv1;
+document.getElementById("wlp1").innerHTML=(((fv1-sv1)*100)/fv1).toPrecision(4);
+wl1=(((fv1-sv1)*100)/fv1);
+
+document.getElementById("psstd1").innerHTML=fv2;
+document.getElementById("psstd2").innerHTML=sv2;
+document.getElementById("wlg2").innerHTML=fv2-sv2;
+document.getElementById("wlp2").innerHTML=(((fv2-sv2)*100)/fv2).toPrecision(4);
+wl2=(((fv2-sv2)*100)/fv2);
+
+document.getElementById("r011").innerHTML=fv3;
+document.getElementById("r012").innerHTML=sv3;
+document.getElementById("wlg3").innerHTML=fv3-sv3;
+document.getElementById("wlp3").innerHTML=(((fv3-sv3)*100)/fv3).toPrecision(4);
+wl3=(((fv3-sv3)*100)/fv3);
+
+
+document.getElementById("r021").innerHTML=fv4;
+document.getElementById("r022").innerHTML=sv4;
+document.getElementById("wlg4").innerHTML=fv4-sv4;
+document.getElementById("wlp4").innerHTML=(((fv4-sv4)*100)/fv4).toPrecision(4);
+wl4=(((fv4-sv4)*100)/fv4);
+
+
+
+document.getElementById("r031").innerHTML=fv5;
+document.getElementById("r032").innerHTML=sv5;
+document.getElementById("wlg5").innerHTML=fv5-sv5;
+document.getElementById("wlp5").innerHTML=(((fv5-sv5)*100)/fv5).toPrecision(4);
+wl5=(((fv5-sv5)*100)/fv5);
+
+
+
+
+document.getElementById("r041").innerHTML=fv6;
+document.getElementById("r042").innerHTML=sv6;
+document.getElementById("wlg6").innerHTML=fv6-sv6;
+document.getElementById("wlp6").innerHTML=(((fv6-sv6)*100)/fv6).toPrecision(4);
+wl6=(((fv6-sv6)*100)/fv6);
+
+var totn_array = [wl1,wl2,wl3,wl4,wl5,wl6];
+
+var m=(Math.min(...totn_array));
+
+
+if(wl1==m)
+{
+  document.getElementById("conclusion").innerHTML="Hence, We can conclude that 'FR' is the best fire retardand because percentage weight loss is minimum"+m;
+}
+
+
+if(wl2==m)
+{
+  document.getElementById("conclusion").innerHTML="Hence, We can conclude that 'PS STD' is the best fire retardand because percentage weight loss is minimum";
+}
+
+
+if(wl3==m)
+{
+  document.getElementById("conclusion").innerHTML="Hence, We can conclude that 'R 01' is the best fire retardand because percentage weight loss is minimum";
+}
+
+
+if(wl4==m)
+{
+  document.getElementById("conclusion").innerHTML="Hence, We can conclude that 'R 02' is the best fire retardand because percentage weight loss is minimum";
+}
+
+
+if(wl5==m)
+{
+  document.getElementById("conclusion").innerHTML="Hence, We can conclude that 'R 03' is the best fire retardand because percentage weight loss is minimum";
+}
+
+
+if(wl6==m)
+{
+  document.getElementById("conclusion").innerHTML="Hence, We can conclude that 'R 04' is the best fire retardand because percentage weight loss is minimum";;
+}
+
+
+
+
+        function toggleDataSeries(e) {
+          if (
+            typeof e.dataSeries.visible === "undefined" ||
+            e.dataSeries.visible
+          ) {
+            e.dataSeries.visible = false;
+          } else {
+            e.dataSeries.visible = true;
+          }
+          chart.render();
+        }
+      }
+    </script>
+  </head>
+  <body>
+  
+  
+  
+  
+<h1 style="text-align: center;"><strong><span style="font-family: Verdana, Geneva, sans-serif;">Test for limited flame spread on&nbsp;</span></strong></h1><h1 style="text-align: center;">
+<span style="font-family: Verdana, Geneva, sans-serif;"><strong>test specimen</strong></span></h1><p><br></p><h2 style="text-align: center;"><img src="https://i.ibb.co/wBVQW4g/experiment.png" style="width: 857px;" class="fr-fic fr-dib">
+</h2><p style="text-align: center;"><br></p><p style="text-align: center;"><strong><span style="font-size: 18px; color: rgb(0, 0, 0);">
+The test specimen was placed in the device holder at angle 45&deg; and exposed to the effects of flame for 5 minutes.</span></strong></p><p></p><p><br></p><p style="align:center;">
+<img src="https://i.ibb.co/Qc37PWB/Screenshot-31.png" style="width: 780px;align:center" class="fr-fic fr-dib"></p><p></p><p><br></p><p style="text-align: center;"><span style="font-size: 18px;"><strong>
+The test specimens were spruce wood boards with dimensions 200 x 95 x 10 mm (&plusmn; 1 mm). On each set of test specimens of 5 pieces (Figure 2) different types of fire retardants were applied.</strong></span></p><p><p style="align:center;"><img src="https://i.ibb.co/Gts6GCD/Screenshot-32.png" style="width: 785px;" class="fr-fic fr-dib"></p>
+ </p><p style="text-align: center;"><span style="font-size: 30px;"><strong><span style="color: rgb(0, 0, 0);">Results of Experiment</span>&nbsp;</strong></span></p><p style="text-align: center;"><span style="font-size: 18px;">
+ <strong>The experiment was performed in accordance with the methodology for the test of limited flame spread: each test specimen was placed in the test device (in the holder under the angle of 45&deg;) and was exposed to the 
+ effects of an open mid-height flame for 5 minutes (Fig. 3). For each individual test the height of the flame was exactly defined. Initial and Final weights were measured from each of the specimen and percentage change in weight was calculated accordingly.</strong></span></p><p><br></p>
+ 
+ 
+ 
+ <h1 style="text-align:center"> Please enter the value of specimen before and after the experiment: </h1>
+
+<br>
+<br>
+<br>
+
+  
+  
+  
+  
+    <div
+      id="chartContainer"
+      style="
+        height: 500px;
+        width: 60%;
+        margin-left: 30;
+
+        padding-left: 155px;
+      "
+    ></div>
+
+    <br />
+    <br />
+
+
+
+
+
+    <div class="formdiv" style="padding-left: 150px;">
+      <form>
+        <label style="min-width:50;">Before Experiment:</label>
+        <input type="number" id="fv1" class="firstvalue" value=""  placeholder="FR"/>
+        <label style="min-width:50;">After Experiment:</label>
+        <input type="number" id="sv1" class="second value" value="" placeholder="FR"/>
+        <br />
+
+        <label style="min-width:50;">Before Experiment:</label>
+        <input type="number" id="fv2" class="firstvalue" value="" placeholder="PS STD"/>
+        <label style="min-width:50;">After Experiment:</label>
+        <input type="number" id="sv2" class="second value" value="" placeholder="PS STD"/>
+
+        <br />
+        <label style="min-width:50;">Before Experiment:</label>
+        <input type="number" id="fv3" class="firstvalue" value=""  placeholder="R 01"/>
+        <label style="min-width:50;">After Experiment:</label>
+        <input type="number" id="sv3" class="second value" value="" placeholder="R 01"/>
+        <br />
+
+        <label style="min-width:50;">Before Experiment:</label>
+        <input type="number" id="fv4" class="firstvalue" value="" placeholder="R 02"/>
+        <label style="min-width:50;">After Experiment:</label>
+        <input type="number" id="sv4" class="second value" value="" placeholder="R 02"/>
+        <br />
+
+        <label style="min-width:50;">Before Experiment:</label>
+        <input type="number" id="fv5" class="firstvalue" value="" placeholder="R 03"/>
+        <label style="min-width:50;">After Experiment:</label>
+        <input type="number" id="sv5" class="second value" value="" placeholder="R 03"/>
+        <br />
+
+        <label style="min-width:50;">Before Experiment:</label>
+        <input type="number" id="fv6" class="firstvalue" value="" placeholder="R 04"/>
+        <label style="min-width:50;">After Experiment:</label>
+        <input type="number" id="sv6" class="second value" value="" placeholder="R 04"/>
+        <br />
+        <br />
+        <br />
+        <input
+          type="button"
+          value="Submit"
+          id="button1"
+          name="submit"
+          onclick="solve()"
+        />
+      </form>
+    </div>
+    <br>
+    <br>
+
+<div style="padding-left: 150px;">
+
+
+  <table>
+    <tr>
+    <th>Fire Retardants</th>
+    <th>Weight before Experiment</th>
+    <th>Weight after Experiment</th>
+    <th>Weight Loss[g]</th>
+    <th>Weight Loss[%]</th>
+    </tr>
+    <tr>
+    <td>FR</td>
+    <td id="frb1"></td>
+    <td id="fra1"></td>
+    <td id="wlg1"></td>
+    <td id="wlp1"></td>
+    </tr>
+    <tr>
+      <td>PS STD</td>
+      <td id="psstd1"></td>
+      <td id="psstd2"></td>
+      <td id="wlg2"></td>
+      <td id="wlp2"></td>
+    </tr>
+    <tr>
+      <td>R 01</td>
+      <td id="r011"></td>
+      <td id="r012"></td>
+      <td id="wlg3"></td>
+      <td id="wlp3"></td>
+    <tr>
+      <td>R 02</td>
+      <td id="r021"></td>
+      <td id="r022"></td>
+      <td id="wlg4"></td>
+      <td id="wlp4"></td>
+  </tr>
+  <tr>
+    <td>R 03</td>
+    <td id="r031"></td>
+    <td id="r032"></td>
+    <td id="wlg5"></td>
+    <td id="wlp5"></td>
+</tr>
+<tr>
+  <td>R 04</td>
+  <td id="r041"></td>
+  <td id="r042"></td>
+  <td id="wlg6"></td>
+  <td id="wlp6"></td>
+</tr>
+  </table>
+
+</table>
+
+
+</div>
+
+<h2 id="conclusion" ></h2>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </body>
+</html>
